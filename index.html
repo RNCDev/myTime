@@ -1,17 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- head definitions go here -->
+    <title id="title"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
 </head>
 <body>
-    <p>Hello World</p>
-    <p>Date/Time: <span id="datetime"></span></p>
- 
-    <p id="datetime"></p>
+
+    <p>
+        <span id="datetime" style="color:blue;font-size:300%">
+        </span>
+    </p>
 
     <script>
-        var dt = new Date();
-        document.getElementById("datetime").innerHTML = dt.toLocaleTimeString();
+        function updateClock() {
+            var now = new Date();
+            var minutes = now.getMinutes()
+            var formatMinutes = ( minutes < 10 ) ? ( "0" + ( minutes ).toString() ) : ( minutes ).toString();
+            var seconds = now.getSeconds()
+            var formatSeconds = ( seconds < 10 ) ? ( "0" + ( seconds ).toString() ) : ( seconds ).toString();
+            var time = now.getHours() + ':' + formatMinutes + ':' + formatSeconds;
+
+            // set the content of the element with the ID time to the formatted string
+            document.getElementById('datetime').innerHTML = time;
+
+            // call this function again in 1000ms
+            setTimeout(updateClock, 100);
+        }
+        updateClock(); // initial call
     </script>
 
 </body>
