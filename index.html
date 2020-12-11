@@ -8,13 +8,15 @@
 <body>
 
     <p>
-        <span id="datetime" style="color:blue;font-size:300%">
+        <span id="datetime" style="color:blue;font-size:600%">
         </span>
     </p>
 
     <script>
         function updateClock() {
             var now = new Date();
+            var timeZone = now.getTimezoneOffset()
+            var UTCset = now.getUTCHours()
             var minutes = now.getMinutes()
             var formatMinutes = ( minutes < 10 ) ? ( "0" + ( minutes ).toString() ) : ( minutes ).toString();
             var seconds = now.getSeconds()
@@ -22,7 +24,7 @@
             var time = now.getHours() + ':' + formatMinutes + ':' + formatSeconds;
 
             // set the content of the element with the ID time to the formatted string
-            document.getElementById('datetime').innerHTML = time;
+            document.getElementById('datetime').innerHTML = time + " time zone offset: " + timeZone + " what is utc?" + UTCset;
 
             // call this function again in 1000ms
             setTimeout(updateClock, 100);
